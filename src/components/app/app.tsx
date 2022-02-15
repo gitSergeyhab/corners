@@ -1,5 +1,9 @@
+import PageCart from '../pages/page-cart/page-cart';
+
+
 function App(): JSX.Element {
-  return <p>Hello, world!</p>;
+
+  return <PageCart/>;
 }
 
 export default App;
