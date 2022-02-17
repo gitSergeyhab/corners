@@ -14,9 +14,16 @@
   background-color: white;
   z-index: 1;
   border: 1px solid #9F9F9F;
+  cursor: pointer;
 }
 
 .react-package__item:not(:last-child) {
 
   margin-bottom: 19px;
+
 }
+
+/* .react-package__input[placeholder] {
+  color: #9F9F9F;
+
+} */

@@ -5,7 +5,6 @@ import { setAddress, setCoordinates, setProducts, setProductsError } from './act
 import { toast } from 'react-toastify';
 import { mockData } from '../mock/mock-data';
 import { setProductToStorage } from '../utils/storage-utils';
-import { mapApi } from '../services/map-api';
 import { formatCoordinates, getAddressFromResponse, getCoordinateFromResponse, getGeoCoordinatesString, getMapUrl, getStringAddressFromText } from '../utils/map-utils';
 
 const URL = 'https://run.mocky.io/v3/59f47e8e-2a09-48c3-8a1d-0af8e5817f7c';
@@ -35,7 +34,6 @@ export const fetchAddress = (coordinate: number[]) =>
       const result = await axios.get(url);
       const address = getAddressFromResponse(result);
       if (address) {
-        console.log(coordinate, address);
         dispatch(setAddress(address));
         dispatch(setCoordinates(coordinate));
       }
@@ -47,6 +45,10 @@ export const fetchAddress = (coordinate: number[]) =>
 
 export const fetchCoordinate = (address: string) =>
   async (dispatch: Dispatch<Action>) => {
+    if (!address) {
+      toast.warn('Введите адрес');
+      return;
+    }
     try {
       const addressString = getStringAddressFromText(address);
       const url = getMapUrl(addressString);
@@ -57,11 +59,8 @@ export const fetchCoordinate = (address: string) =>
         const fixCoordinates = [coordinates[1], coordinates[0]]; // !!! в yandex maps and Grocode  разная последовательность координат!
         dispatch(setCoordinates(fixCoordinates));
         dispatch(setAddress(address));
-        console.log(fixCoordinates);
       }
-
     } catch {
       toast.error('Что-то не так...');
-      // dispatch(setAddress('!!!'));
     }
   };

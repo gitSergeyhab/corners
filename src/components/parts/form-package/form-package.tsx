@@ -1,17 +1,17 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './form-package.css';
 
-const PACKAGES = [
-  {name: 'без упаковки', value: 'without_packaging'},
-  {name: 'стандартная', value: 'standard'},
-  {name: 'подарочная', value: 'gift'},
-];
 
-function OnePackage({option} : {option: {name: string, value: string}}) {
-  const {name, value} = option;
+const PACKAGES = ['без упаковки',  'стандартная', 'подарочная'];
+
+function OnePackage({option, onOptionClick} : {option: string, onOptionClick: () => void}) {
   return (
-    <li className="react-package__item">{name} {value}</li>
+    <li
+      onClick={onOptionClick}
+      className="react-package__item"
+    >{option}
+    </li>
   );
 }
 
@@ -19,18 +19,40 @@ function OnePackage({option} : {option: {name: string, value: string}}) {
 export default function FormPackage() {
 
   const [isList, setList] = useState(false);
-  const [value, setValue] = useState('Тип Упаковки');
+  const [value, setValue] = useState<string | undefined>(undefined);
 
-  const packageOptions = PACKAGES.map((item) => <OnePackage option={item} key={item.value} />);
+  const packageOptions = PACKAGES.map((item) => <OnePackage option={item} onOptionClick={() => setValue(item)} key={item} />);
   const optionList = isList ?  <ul className="react-package__list">{packageOptions}</ul> : null;
-  const classes = `reg-form__elem  package ${isList ? 'package--up' : ''} react-package`;
+
+  const classesDiv = `reg-form__elem  package ${isList ? 'package--up' : ''} react-package`;
+  const classesLabel = `form-label ${value ? '' : 'form-label--hidden'}`;
+
+  const handleOutsideOptionClick = (evt: MouseEvent) => {
+    if (evt.target instanceof Element && !evt.target.closest('.reg-form__elem')) {
+      setList(false);
+    }
+  };
+
+  useEffect(() => {
+    document.body.addEventListener('click', handleOutsideOptionClick);
+    return () => document.body.removeEventListener('click', handleOutsideOptionClick);
+  });
 
   return (
-    <div className={classes}
+    <div className={classesDiv}
       onClick={() => setList((status) => !status)}
     >
-      <label htmlFor="package" className="form-label">Тип Упаковки</label>
-      <input style={{color: '#9F9F9F'}} type="text" id="package" value={value} className="reg-form__input" required/>
+      <label htmlFor="package" className={classesLabel}>Тип Упаковки</label>
+      <input
+        name="package"
+        style={{color: '#9F9F9F'}}
+        type="text"
+        id="package"
+        defaultValue={value}
+        placeholder='Тип Упаковки'
+        className="reg-form__input react-package__input"
+        required
+      />
       {optionList}
     </div>
   );

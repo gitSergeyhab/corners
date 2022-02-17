@@ -1,15 +1,13 @@
-import { FocusEvent, FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCoordinate } from '../../../store/api-actions';
 import { getAddress } from '../../../store/map-reducer/map-reducer-selectors';
 
 export default function FormAddress() {
   const address = useSelector(getAddress);
-  console.log('address', address);
 
   const [valueAddress, setValueAddress] = useState(address);
-
-  console.log('valueAddress', valueAddress);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setValueAddress(address);
@@ -19,18 +17,22 @@ export default function FormAddress() {
 
   const handleAddressChange = (evt: FormEvent<HTMLTextAreaElement>) => {
     const value = evt.currentTarget.value;
+    if (value) {
+      setError(false);
+    }
     setValueAddress(value); // чтобы менялось поле при событии на карте
   };
 
   const handleAddressBlur = () => {
-
     dispatch(fetchCoordinate(valueAddress));
+    setError(!valueAddress);
   };
 
+  const classesLabel = `form-label ${ error ? 'form-label--error' : ''}`;
 
   return (
     <div className="reg-form__elem reg-form__elem--address">
-      <label htmlFor="address" className="form-label">Адрес</label>
+      <label htmlFor="address" className={classesLabel}>Адрес</label>
       <textarea
         onBlur={handleAddressBlur}
         onChange={handleAddressChange}
