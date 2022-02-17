@@ -1,0 +1,22 @@
+.react-package {
+  position: relative;
+}
+
+.react-package__list {
+  box-sizing: border-box;
+  margin: 0;
+  width: 100%;
+  position: absolute;
+  top: 44px;
+  list-style: none;
+  padding: 20px;
+  color: #9F9F9F;
+  background-color: white;
+  z-index: 1;
+  border: 1px solid #9F9F9F;
+}
+
+.react-package__item:not(:last-child) {
+
+  margin-bottom: 19px;
+}
