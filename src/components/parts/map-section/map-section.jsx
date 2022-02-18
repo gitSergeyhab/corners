@@ -23,10 +23,13 @@ export default function MapSection() {
   return (
     <section className="map-section">
       <YMaps>
-        <div onMouseUp={ handleMouseUp }>
+        <div
+          onMouseUp={ handleMouseUp }
+          onTouchEnd={ handleMouseUp }
+        >
           <Map
             modules={['Placemark', 'geocode', 'geoObject.addon.balloon']}
-            state={{ center: coordinates, zoom: ZOOM}}
+            state={{ center: coordinates, zoom: ZOOM }}
             height="100%"
             width="100%"
           >
