@@ -30,7 +30,6 @@ export default function Form() {
     console.log(jsonData);
     // eslint-disable-next-line no-alert
     alert(jsonData);
-    evt.currentTarget.reset();
   };
 
   return (
