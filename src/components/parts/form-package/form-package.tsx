@@ -45,7 +45,6 @@ export default function FormPackage() {
       <label htmlFor="package" className={classesLabel}>Тип Упаковки</label>
       <input
         name="package"
-        style={{color: '#9F9F9F', pointerEvents: 'none'}}
         type="text"
         id="package"
         defaultValue={value}

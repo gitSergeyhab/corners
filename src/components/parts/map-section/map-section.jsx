@@ -17,10 +17,8 @@ export default function MapSection() {
   const [localCoords, setLocalCoords] = useState(coordinates);
 
 
-  const handleMouseUp = () => {
-    dispatch(fetchAddress(localCoords));
-  };
-
+  const handleMouseUp = () => dispatch(fetchAddress(localCoords));
+  const handleMarkDrag = (evt) => setLocalCoords(evt.originalEvent.target.geometry._coordinates);
 
   return (
     <section className="map-section">
@@ -35,7 +33,7 @@ export default function MapSection() {
             <Placemark
               geometry={coordinates}
               options={{preset: PRESET, iconColor: COLOR, draggable: true}}
-              onGeometryChange={(x) => setLocalCoords(x.originalEvent.target.geometry._coordinates)}
+              onGeometryChange={handleMarkDrag}
             />
           </Map>
         </div>

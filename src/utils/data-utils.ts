@@ -20,4 +20,10 @@ export const changeData = (data: Product[], id: string, value: number) => {
   return [...data.slice(0, index), newProduct, ...data.slice(index + 1)];
 };
 
+export const getJSONFromForm = (form: HTMLFormElement) => {
+  const data = new FormData(form);
+  const dataObject: {[key: string]: FormDataEntryValue} = {};
+  data.forEach((value, key) => dataObject[key] = value);
+  return JSON.stringify(dataObject);
+};
 

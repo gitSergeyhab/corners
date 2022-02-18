@@ -3,18 +3,13 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { ToastMessage } from '../../../const';
 import { getEmailErrorStatus, getPhoneErrorStatus } from '../../../store/form-error/form-error-selectors';
+import { getJSONFromForm } from '../../../utils/data-utils';
 import FormSubmit from '../form-submit/form-submit';
 import Login from '../login/login';
 import Products from '../products/products';
 import RegistrationMap from '../registration-map/registration-map';
 import ResultMobile from '../result-mobile/result-mobile';
 
-const getJSONFromForm = (form: HTMLFormElement) => {
-  const data = new FormData(form);
-  const dataObject: {[key: string]: FormDataEntryValue} = {};
-  data.forEach((value, key) => dataObject[key] = value);
-  return JSON.stringify(dataObject);
-};
 
 export default function Form() {
 
