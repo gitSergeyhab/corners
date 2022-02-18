@@ -14,3 +14,7 @@ export const ToastMessage = {
   InvalidForm: 'Введенные данные некорректны',
 };
 
+export const enum ScreenType {
+  Desktop = 'desktop',
+  Mobile = 'mobile',
+}

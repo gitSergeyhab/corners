@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAddress } from '../../../store/api-actions';
 import { getCoordinates } from '../../../store/map-reducer/map-reducer-selectors';
 import { useState } from 'react';
+import ResultPrice from '../result-price/result-price';
+import { ScreenType } from '../../../const';
 
 
 const ZOOM = 17;
@@ -41,6 +43,7 @@ export default function MapSection() {
           </Map>
         </div>
       </YMaps>
+      <ResultPrice screenType={ScreenType.Desktop}/>
     </section>
   );
 }

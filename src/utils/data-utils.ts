@@ -27,3 +27,5 @@ export const getJSONFromForm = (form: HTMLFormElement) => {
   return JSON.stringify(dataObject);
 };
 
+export const getPrice = (products: Product[]) => products.reduce((acc, item) => acc + item.amount * item.price , 0);
+
