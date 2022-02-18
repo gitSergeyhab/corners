@@ -1,0 +1,16 @@
+.react-404 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 30% 0;
+  text-align: center;
+}
+
+.react-404 a {
+  text-decoration: none;
+  color: orange;
+}
+
+.react-404 a:focus, .react-404 a:hover {
+  text-decoration: underline;
+  color: orangered;
+}

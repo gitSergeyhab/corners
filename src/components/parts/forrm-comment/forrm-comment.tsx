@@ -1,5 +1,7 @@
 import { FormEvent, useState } from 'react';
+import TextareaAutosize from 'react-textarea-autosize';
 import { getLabelClasses } from '../../../utils/validation-utils';
+
 
 export default function FormComment() {
 
@@ -27,15 +29,15 @@ export default function FormComment() {
         className={classesLabel}
       >Комментарий
       </label>
-      <textarea
+      <TextareaAutosize
         value={value}
         onChange={handleInputChange}
         name="comment"
         id="comment"
         placeholder="Введите комментарий"
-        className="reg-form__textarea"
-      >
-      </textarea>
+        className="reg-form__input reg-form__textarea"
+      />
+
     </div>
   );
 }

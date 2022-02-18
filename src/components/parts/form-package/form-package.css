@@ -18,12 +18,6 @@
 }
 
 .react-package__item:not(:last-child) {
-
   margin-bottom: 19px;
-
 }
 
-/* .react-package__input[placeholder] {
-  color: #9F9F9F;
-
-} */

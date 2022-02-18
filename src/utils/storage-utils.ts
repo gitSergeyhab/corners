@@ -1,6 +1,6 @@
+import { PRODUCT_KEY } from '../const';
 import { Product } from '../types/types';
 
-const PRODUCT_KEY = 'PRODUCT_KEY';
 
 export const getProductFromStorage = () => {
   const data = localStorage.getItem(PRODUCT_KEY);

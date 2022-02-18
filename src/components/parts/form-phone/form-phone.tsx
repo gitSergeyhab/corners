@@ -1,4 +1,6 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setErrorPhone } from '../../../store/actions';
 import { checkPhone, getInputClasses, getLabelClasses } from '../../../utils/validation-utils';
 
 export default function FormPhone() {
@@ -7,6 +9,12 @@ export default function FormPhone() {
 
   const [error, setError] = useState(false);
   const [hidden, setHidden] = useState(true);
+
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setErrorPhone(error));
+  }, [dispatch, error]);
 
 
   const handleInputBlur = () => {

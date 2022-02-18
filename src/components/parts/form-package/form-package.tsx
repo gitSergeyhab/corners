@@ -1,5 +1,5 @@
-
 import { useEffect, useState } from 'react';
+
 import './form-package.css';
 
 
@@ -45,7 +45,7 @@ export default function FormPackage() {
       <label htmlFor="package" className={classesLabel}>Тип Упаковки</label>
       <input
         name="package"
-        style={{color: '#9F9F9F'}}
+        style={{color: '#9F9F9F', pointerEvents: 'none'}}
         type="text"
         id="package"
         defaultValue={value}
@@ -57,3 +57,5 @@ export default function FormPackage() {
     </div>
   );
 }
+
+

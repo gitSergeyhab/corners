@@ -1,18 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { ToastMessage } from '../../../const';
 import { setProducts } from '../../../store/actions';
 import { getProducts } from '../../../store/products-reducer/products-reducer-selectors';
 import { Product } from '../../../types/types';
 import { changeData } from '../../../utils/data-utils';
 import { setProductToStorage } from '../../../utils/storage-utils';
 
-// {
-//   "id": "904.989.72",
-//   "name": "VINTER GARLAND 2021",
-//   "type": "Украшение, венок, красный/золотой38 см",
-//   "img": "https://www.ikea.com/ru/ru/images/products/vinter-2021-vinte…krashenie-venok-krasnyy-zolotoy__0986113_pe817049_s5.jpg?f=s",
-//   "price": 1699,
-//   "amount": 1
-// }
 
 export default function ProductCard({product} : {product: Product}) {
 
@@ -23,6 +17,9 @@ export default function ProductCard({product} : {product: Product}) {
 
   const changeProducts = (count: number) => {
     const newData = changeData(products, id, count);
+    if (!newData.length) {
+      toast.warn(ToastMessage.NoData);
+    }
     dispatch(setProducts(newData));
     setProductToStorage(newData);
   };

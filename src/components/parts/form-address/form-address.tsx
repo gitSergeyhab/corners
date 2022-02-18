@@ -1,7 +1,10 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import TextareaAutosize from 'react-textarea-autosize';
+
 import { fetchCoordinate } from '../../../store/api-actions';
 import { getAddress } from '../../../store/map-reducer/map-reducer-selectors';
+
 
 export default function FormAddress() {
   const address = useSelector(getAddress);
@@ -33,13 +36,12 @@ export default function FormAddress() {
   return (
     <div className="reg-form__elem reg-form__elem--address">
       <label htmlFor="address" className={classesLabel}>Адрес</label>
-      <textarea
+      <TextareaAutosize
         onBlur={handleAddressBlur}
         onChange={handleAddressChange}
         value={valueAddress}
         name="address" id="address" className="reg-form__input reg-form__textarea" required
-      >
-      </textarea>
+      />
     </div>
   );
 }

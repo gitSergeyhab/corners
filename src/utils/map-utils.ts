@@ -31,19 +31,8 @@ export const getAddressFromResponse = (res: any): string | null => {
   }
 };
 
-
 export const getStringAddressFromText = (text: string) => text.split(' ').join('+');
 
-// export const getGeoCoordinatesString = (coordinate: number[]) => coordinate.join(',');
 export const getGeoCoordinatesString = (coordinate: number[]) => `${coordinate[1]},${coordinate[0]}`;
 
-
 export const getMapUrl = (params: string) => `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=${KEY_GEO_CODE_YANDEX}&geocode=${params}`;
-
-
-// axios.get(`https://geocode-maps.yandex.ru/1.x/?format=json&apikey=${'b3674886-ae1b-4e37-91a6-e5c47b6376c5'}&geocode=Тула,+пос.Менделеевский,улица+Л.Толстого,д.,11`)
-//   .then((w) => console.log(formatCoordinates(getCoordinateFromResponse(w), [0,0])));
-
-
-// axios.get(`https://geocode-maps.yandex.ru/1.x/?format=json&apikey=${'b3674886-ae1b-4e37-91a6-e5c47b6376c5'}&geocode=37.580526,54.132699`)
-//   .then((w) => console.log(w, getAddressFromResponse(w)));

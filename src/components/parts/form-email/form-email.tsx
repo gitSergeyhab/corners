@@ -1,4 +1,6 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setErrorEmail } from '../../../store/actions';
 import { checkEmail, getInputClasses, getLabelClasses } from '../../../utils/validation-utils';
 
 
@@ -8,6 +10,11 @@ export default function FormEmail () {
 
   const [error, setError] = useState(false);
   const [hidden, setHidden] = useState(true);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setErrorEmail(error));
+  }, [dispatch, error]);
 
 
   const handleInputBlur = () => {

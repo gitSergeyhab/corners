@@ -1,5 +1,6 @@
 import { Product } from '../types/types';
 
+
 export const changeData = (data: Product[], id: string, value: number) => {
 
   const index = data.findIndex((item) => item.id === id);

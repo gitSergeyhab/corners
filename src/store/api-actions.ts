@@ -1,27 +1,27 @@
-import { Action } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { Action } from '@reduxjs/toolkit';
 import { Dispatch } from 'react';
-import { setAddress, setCoordinates, setProducts, setProductsError } from './actions';
 import { toast } from 'react-toastify';
+
+import { setAddress, setCoordinates, setProducts, setProductsError } from './actions';
 import { mockData } from '../mock/mock-data';
 import { setProductToStorage } from '../utils/storage-utils';
 import { formatCoordinates, getAddressFromResponse, getCoordinateFromResponse, getGeoCoordinatesString, getMapUrl, getStringAddressFromText } from '../utils/map-utils';
-
-const URL = 'https://run.mocky.io/v3/59f47e8e-2a09-48c3-8a1d-0af8e5817f7c';
+import { PRODUCT_URL, ToastMessage } from '../const';
 
 
 export const fetchProducts = () =>
   async (dispatch: Dispatch<Action>) => {
     try {
-      const {data} =  await axios.get(URL);
+      const {data} =  await axios.get(PRODUCT_URL);
       const products = await JSON.parse(data);
       dispatch(setProducts(products));
-      toast.success(`загружены данные с "${URL}"`);
+      toast.success(ToastMessage.DataFromServer);
       setProductToStorage(products);
     } catch {
       dispatch(setProductsError(true));
       dispatch(setProducts(mockData));
-      toast.warning(`не удалось загрузить данные с "${URL}", используются моковые данные`);
+      toast.warning(ToastMessage.ProductServerError);
       setProductToStorage(mockData);
     }
   };
@@ -38,8 +38,7 @@ export const fetchAddress = (coordinate: number[]) =>
         dispatch(setCoordinates(coordinate));
       }
     } catch {
-      toast.error('Что-то не так...');
-      // dispatch(setAddress('!!!'));
+      toast.error(ToastMessage.GeoCodeError);
     }
   };
 
@@ -56,11 +55,11 @@ export const fetchCoordinate = (address: string) =>
       const coordinateString = getCoordinateFromResponse(result);
       const coordinates = formatCoordinates(coordinateString);
       if (coordinates && coordinates.length === 2) {
-        const fixCoordinates = [coordinates[1], coordinates[0]]; // !!! в yandex maps and Grocode  разная последовательность координат!
+        const fixCoordinates = [coordinates[1], coordinates[0]]; // !!! в yandex maps and Geocode  разная последовательность координат!
         dispatch(setCoordinates(fixCoordinates));
         dispatch(setAddress(address));
       }
     } catch {
-      toast.error('Что-то не так...');
+      toast.error(ToastMessage.GeoCodeError);
     }
   };
